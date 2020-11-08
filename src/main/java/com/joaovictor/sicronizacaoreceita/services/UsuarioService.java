@@ -1,11 +1,9 @@
 package com.joaovictor.sicronizacaoreceita.services;
 
-import java.io.InputStream;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.joaovictor.sicronizacaoreceita.domain.Conta;
+import com.joaovictor.sicronizacaoreceita.domain.JwtRequest;
+import com.joaovictor.sicronizacaoreceita.domain.JwtResponse;
 import com.joaovictor.sicronizacaoreceita.domain.Usuario;
 
 public interface UsuarioService {
@@ -17,4 +15,6 @@ public interface UsuarioService {
 	public List<Usuario> findAll();
 	
 	public Usuario findByEmail(String email);
+	
+	public JwtResponse authenticate(JwtRequest jwtRequest) throws Exception;
 }

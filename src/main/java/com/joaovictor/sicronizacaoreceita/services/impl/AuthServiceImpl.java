@@ -1,8 +1,5 @@
 package com.joaovictor.sicronizacaoreceita.services.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,19 +7,16 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.joaovictor.sicronizacaoreceita.domain.JwtRequest;
 import com.joaovictor.sicronizacaoreceita.domain.JwtResponse;
-import com.joaovictor.sicronizacaoreceita.domain.Usuario;
 import com.joaovictor.sicronizacaoreceita.exceptions.NaoEncontradoException;
 import com.joaovictor.sicronizacaoreceita.exceptions.RequisicaoInvalidaException;
-import com.joaovictor.sicronizacaoreceita.repositories.UsuarioRepository;
 import com.joaovictor.sicronizacaoreceita.security.JwtTokenUtil;
-import com.joaovictor.sicronizacaoreceita.services.UsuarioService;
+import com.joaovictor.sicronizacaoreceita.services.AuthService;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
@@ -31,39 +25,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
-	
-	@Autowired
-	private UsuarioRepository repo;
-	
-	@Override
-	public Usuario find(Integer id) {
-		Optional<Usuario> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new NaoEncontradoException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
-	}
-	
-	@Transactional
-	@Override
-	public Usuario insert(Usuario obj) {
-		obj.setId(null);
-		obj = repo.save(obj);
-		return obj;
-	}
-	
-	@Override
-	public List<Usuario> findAll() {
-		return repo.findAll();
-	}
-	
-	@Override
-	public Usuario findByEmail(String email) {
-		Usuario obj = repo.findByEmail(email);
-		if (obj == null) {
-			throw new NaoEncontradoException(
-					"Objeto não encontrado! email: " + email + ", Tipo: " + Usuario.class.getName());
-		}
-		return obj;
-	}
 	
 	@Override
 	public JwtResponse authenticate(JwtRequest jwtRequest) throws Exception {
