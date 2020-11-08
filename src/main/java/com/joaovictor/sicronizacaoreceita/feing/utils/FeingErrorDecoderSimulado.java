@@ -11,13 +11,13 @@ import com.joaovictor.sicronizacaoreceita.exceptions.RequisicaoInvalidaException
 import com.joaovictor.sicronizacaoreceita.exceptions.ServicoIndisponivelException;
 import com.joaovictor.sicronizacaoreceita.exceptions.TempoExpiradoException;
 
-// TODO Classe simula um FeingErrorDecoder, a ideia é simular a captura de erros vindos de requisições feitas com uso de feing clients.
+// Classe simula um FeingErrorDecoder, a ideia é simular a captura de erros vindos de requisições feitas com uso de feing clients.
 // Exemplo: Um feing client para se comunicar com o serviço da Receita para onde seria enviado o csv
 public class FeingErrorDecoderSimulado {
 	
 	public Exception decode(int statusCode) {
 		
-		// TODO mensagens setadas apensa para exemplicar, mas a idéia é que usando o feingErrorDecoder seja pego as mensagens retornadas na resposta da requisição
+		// mensagens setadas apensa para exemplicar, mas a idéia é que usando o feingErrorDecoder seja pego as mensagens retornadas na resposta da requisição
 		final String ERRO_RECEITA_REQUISICAO_INVALIDA = "Requisiçao inválida na API Receita";
 		final String ERRO_RECEITA_REQUISICAO_NAO_AUTORIZADO = "Não autorizado na API Receita";
 		final String ERRO_RECEITA_REQUISICAO_NAO_AUTENTICADO = "Não autenticado na API Receita";

@@ -26,7 +26,7 @@ public class ReceitaServiceImpl implements ReceitaService {
 		String resultado = null;
 		try {
 			// O bloco de código dentro do try simula uma chamda usando um feing client que se comunica com a API da Receita
-			int randomStatuCode = 404;
+			int randomStatuCode;
 	        // Simula tempo de resposta do serviço (entre 1 e 5 segundos)
 	        long wait = Math.round(Math.random() * 4000) + 1000;
 	        Thread.sleep(wait);
