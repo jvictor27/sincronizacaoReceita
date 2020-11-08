@@ -16,7 +16,8 @@ import com.joaovictor.sicronizacaoreceita.exceptions.TempoExpiradoException;
 public class FeingErrorDecoderSimulado {
 	
 	public Exception decode(int statusCode) {
-			
+		
+		// TO DO mensagens setadas apensa para exemplicar, mas a idéia é que usando o feingErrorDecoder seja pego as mensagens retornadas na resposta da requisição
 		final String ERRO_RECEITA_REQUISICAO_INVALIDA = "Requisiçao inválida na API Receita";
 		final String ERRO_RECEITA_REQUISICAO_NAO_AUTORIZADO = "Não autorizado na API Receita";
 		final String ERRO_RECEITA_REQUISICAO_NAO_AUTENTICADO = "Não autenticado na API Receita";

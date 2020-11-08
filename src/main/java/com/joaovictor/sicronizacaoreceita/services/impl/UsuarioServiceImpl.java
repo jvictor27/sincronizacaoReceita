@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.joaovictor.sicronizacaoreceita.components.Messages;
 import com.joaovictor.sicronizacaoreceita.domain.JwtRequest;
 import com.joaovictor.sicronizacaoreceita.domain.JwtResponse;
 import com.joaovictor.sicronizacaoreceita.domain.Usuario;
@@ -23,6 +24,10 @@ import com.joaovictor.sicronizacaoreceita.services.UsuarioService;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+	
+	@Autowired
+	Messages messages;
+	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
@@ -38,8 +43,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new NaoEncontradoException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
+		return obj.orElseThrow(() -> new NaoEncontradoException(messages.get("usuario.naoencontrado")));
 	}
 	
 	@Transactional
@@ -59,8 +63,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario findByEmail(String email) {
 		Usuario obj = repo.findByEmail(email);
 		if (obj == null) {
-			throw new NaoEncontradoException(
-					"Objeto não encontrado! email: " + email + ", Tipo: " + Usuario.class.getName());
+			throw new NaoEncontradoException(messages.get("usuario.naoencontrado"));
 		}
 		return obj;
 	}
@@ -74,9 +77,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			
 			return new JwtResponse(token);
 		} catch (DisabledException e) {
-			throw new NaoEncontradoException("Usuario não encontrado");
+			throw new NaoEncontradoException(messages.get("usuario.naoencontrado"));
 		} catch (BadCredentialsException e) {
-			throw new RequisicaoInvalidaException("Requisição inválida");
+			throw new RequisicaoInvalidaException(messages.get("Requisição inválida"));
 		}
 	}
 }

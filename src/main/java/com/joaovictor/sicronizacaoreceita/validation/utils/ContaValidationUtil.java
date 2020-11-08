@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.joaovictor.sicronizacaoreceita.components.Messages;
+import com.joaovictor.sicronizacaoreceita.exceptions.RequisicaoInvalidaException;
+
 public abstract class ContaValidationUtil {
 	
 	// Tipos de status validos:
@@ -19,7 +24,7 @@ public abstract class ContaValidationUtil {
 		
 		// Formato agencia: 0000
         if (agencia == null || agencia.length() != 4) {
-        	agenciaValida = false;
+        	throw new RequisicaoInvalidaException("Agência inválida");
         }
         
         return agenciaValida;
@@ -30,7 +35,7 @@ public abstract class ContaValidationUtil {
 		String contaAux = conta.replaceAll("[^0-9]", "");
 		
 		if (contaAux == null || contaAux.length() != 6) {
-			contaValida = false;
+			throw new RequisicaoInvalidaException("Conta inválida");
         }
 		
 		return contaValida;
@@ -40,7 +45,7 @@ public abstract class ContaValidationUtil {
 		boolean statusValido = true;
 		
 		if (status == null || !TIPOS_STATUS.contains(status)) {
-			statusValido = false;
+			throw new RequisicaoInvalidaException("Statu da conta inválido");
         }
 		
 		return statusValido;

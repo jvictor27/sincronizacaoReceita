@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.joaovictor.sicronizacaoreceita.components.Messages;
 import com.joaovictor.sicronizacaoreceita.domain.JwtRequest;
 import com.joaovictor.sicronizacaoreceita.domain.JwtResponse;
 import com.joaovictor.sicronizacaoreceita.exceptions.NaoEncontradoException;
@@ -17,6 +18,10 @@ import com.joaovictor.sicronizacaoreceita.services.AuthService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+	
+	@Autowired
+	Messages messages;
+	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
@@ -35,9 +40,9 @@ public class AuthServiceImpl implements AuthService {
 			
 			return new JwtResponse(token);
 		} catch (DisabledException e) {
-			throw new NaoEncontradoException("Usuario não encontrado");
+			throw new NaoEncontradoException(messages.get("usuario.naoencontrado"));
 		} catch (BadCredentialsException e) {
-			throw new RequisicaoInvalidaException("Requisição inválida");
+			throw new RequisicaoInvalidaException(messages.get("requisicao.dadosinvalidos"));
 		}
 	}
 }

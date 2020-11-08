@@ -13,8 +13,10 @@ import java.util.Objects;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.joaovictor.sicronizacaoreceita.components.Messages;
 import com.joaovictor.sicronizacaoreceita.domain.Conta;
 import com.joaovictor.sicronizacaoreceita.exceptions.ErroInternoException;
 import com.joaovictor.sicronizacaoreceita.exceptions.RequisicaoInvalidaException;
@@ -25,6 +27,7 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvException;
 
 public class ContaCSVUtil {
+	
 	public static String TYPE = "text/csv";
 	private static final List<String> HEADERS = new ArrayList<>(Arrays.asList(
 		    "agencia",
@@ -59,7 +62,7 @@ public class ContaCSVUtil {
 
 			return contas;
 		} catch (IOException e) {
-			throw new ErroInternoException("Falha ao manipular o CSV: " + e.getMessage());
+			throw new ErroInternoException("Erro ao manipular CSV");
 		}
 	}
 	
