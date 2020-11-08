@@ -33,7 +33,7 @@ public class ReceitaServiceImpl implements ReceitaService {
 	        if (wait > 5000)
 	        	randomStatuCode = 503;
 	        // Simula cenário de erro no serviço (0,1% de erro)
-//	        randomStatuCode = (int) Math.round(Math.random() * 1000);
+	        randomStatuCode = (int) Math.round(Math.random() * 1000);
 	        if ((randomStatuCode < 200 || randomStatuCode > 299) && Objects.nonNull(HttpStatus.valueOf(randomStatuCode))) {
 	            throw new FeingErrorDecoderSimulado().decode(randomStatuCode);
 	        }
