@@ -33,7 +33,6 @@ public class ContaResource {
 		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
         "attachment; filename=\"" + filename + "\"");
 		ContaCSVUtil.ContasToCsv(response.getWriter(), contas);
-		// TO DO Ajustar para retornar mensagens em casos de erros capturados @ControllerAdvice
 	}
 	
 }

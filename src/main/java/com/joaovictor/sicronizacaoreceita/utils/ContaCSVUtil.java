@@ -53,11 +53,15 @@ public class ContaCSVUtil {
 
 			Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
-
+			int indice = 0;
 			for (CSVRecord csvRecord : csvRecords) {
+				if (indice == 0)
+					isValidContasCsv(csvRecord);
+				
 				Conta conta = csvRecordToConta(csvRecord);
 				if (Objects.nonNull(conta))
 					contas.add(conta);
+				indice++;
 			}
 
 			return contas;
@@ -69,7 +73,6 @@ public class ContaCSVUtil {
 	public static Conta csvRecordToConta(CSVRecord csvRecord) {
 		Conta conta = null;
 		boolean isValid = true;
-		String[] colunas = null;
 		for (int indice = 0; indice < csvRecord.size(); indice++) {
 			if (HEADERS.contains(csvRecord.get(indice))) {
 				isValid = false;
@@ -103,6 +106,20 @@ public class ContaCSVUtil {
         } catch (CsvException ex) {
         	throw new ErroInternoException("Problemas ao tentar criar o CSV");
         }
+	}
+	
+	public static void isValidContasCsv(CSVRecord csvRecord) {
+
+		if (csvRecord.size() > 4)
+			throw new RequisicaoInvalidaException("Arquivo não é um CSV válido");
+		
+		for (int indice = 0; indice < csvRecord.size(); indice++) {
+				
+			if (!HEADERS.contains(csvRecord.get(indice))) {
+				throw new RequisicaoInvalidaException("Arquivo não é um CSV válido");
+			}
+		}
+
 	}
 
 }
