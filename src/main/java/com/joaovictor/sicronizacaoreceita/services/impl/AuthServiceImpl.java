@@ -18,6 +18,7 @@ import com.joaovictor.sicronizacaoreceita.services.AuthService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+	// TODO Implementar testes
 	
 	@Autowired
 	Messages messages;

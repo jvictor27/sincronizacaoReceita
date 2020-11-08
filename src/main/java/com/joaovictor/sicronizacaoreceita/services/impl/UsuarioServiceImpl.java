@@ -24,6 +24,7 @@ import com.joaovictor.sicronizacaoreceita.services.UsuarioService;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+	// TODO Implementar testes
 	
 	@Autowired
 	Messages messages;

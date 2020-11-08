@@ -12,6 +12,7 @@ import com.joaovictor.sicronizacaoreceita.repositories.UsuarioRepository;
 
 @Service
 public class DBServiceImpl {
+	// TODO Implementar testes
 	
 	@Autowired
 	private PasswordEncoder pe;

@@ -15,6 +15,7 @@ import com.joaovictor.sicronizacaoreceita.services.UsuarioService;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+	// TODO Implementar testes
 
 	@Autowired
 	Messages messages;
